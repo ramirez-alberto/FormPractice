@@ -1,4 +1,9 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using FormPractice.Data;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<FormsContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("FormsContext") ?? throw new InvalidOperationException("Connection string 'FormsContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
